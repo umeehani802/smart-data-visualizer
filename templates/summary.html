@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dataset Summary</title>
+
+    <!-- 1. Import the professional 'Poppins' font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Link to your central stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="card">
+            <h2>Dataset Summary</h2>
+            
+            <!-- Section for .info() -->
+            <h3>Dataframe Info</h3>
+            <div class="info-box" style="background-color: var(--bg-color); text-align: left; max-height: 300px; overflow-y: auto;">
+                <pre>{{ info_output }}</pre>
+            </div>
+
+            <!-- Section for .describe() -->
+            <h3 style="margin-top: 30px;">Descriptive Statistics</h3>
+            <!-- This table will now use the new 'styled-table' class -->
+            {{ describe_table | safe }}
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="margin-top: 20px;">
+            <a href="/options" class="button secondary">Back to Options</a>
+            <a href="/download_summary" class="button">Download Summary as .txt</a>
+        </div>
+    </div>
+</body>
+</html>

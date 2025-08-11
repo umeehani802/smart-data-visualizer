@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dataset Preview</title>
+
+    <!-- 1. Import the professional 'Poppins' font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Link to your central stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Dataset Preview</h2>
+            <p style="color: var(--text-muted);">Showing the first few rows of your uploaded data.</p>
+            
+            <!-- This table will be styled by the rules we added to style.css -->
+            <!-- Note: Your app.py must add class='styled-table' when creating the table HTML -->
+            {{ table | safe }}
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="/summary" class="button">View Full Summary</a>
+            <a href="/options" class="button secondary">Back to Options</a>
+        </div>
+    </div>
+</body>
+</html>

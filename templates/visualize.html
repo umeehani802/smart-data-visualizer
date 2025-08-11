@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualize Dataset</title>
+
+    <!-- 1. Import the professional 'Poppins' font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Link to your central stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- Custom styles for this page -->
+    <style>
+        .preview-area {
+            border: 2px solid var(--primary-color);
+        }
+        .discard-button {
+            background-color: #a02d2d;
+        }
+        .discard-button:hover {
+            background-color: #c0392b;
+        }
+        .error {
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+            border: 1px solid #ff6b6b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Flash Messages for success/errors -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message | safe }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- ========== CHART PREVIEW AREA ========== -->
+        {% if plot_url_preview %}
+        <div class="card preview-area">
+            <h2>Chart Preview</h2>
+            <h3>{{ chart_title_preview }}</h3>
+            <img src="data:image/png;base64,{{ plot_url_preview }}" alt="{{ chart_title_preview }}" style="max-width: 100%; border-radius: 8px;">
+            
+            <form method="post" action="{{ url_for('visualize') }}" style="margin-top: 20px;">
+                <input type="hidden" name="action" value="add_to_report">
+                <input type="hidden" name="title" value="{{ chart_title_preview }}">
+                <input type="hidden" name="plot_url" value="{{ plot_url_preview }}">
+
+                <button type="submit" class="button">Add to Report</button>
+                <a href="{{ url_for('visualize') }}" class="button discard-button">Discard</a>
+            </form>
+        </div>
+        <hr style="margin: 40px 0; border-color: var(--border-color);">
+        {% endif %}
+
+        <!-- ========== CHART GENERATION FORM ========== -->
+        <div class="card">
+            <h2>Create a New Visualization</h2>
+            <form method="post" action="{{ url_for('visualize') }}">
+                
+                <label for="chart_type">1. Select Chart Type</label>
+                <select name="chart_type" id="chart_type" required>
+                    <option value="">--Select--</option>
+                    <option value="bar">Bar Chart</option>
+                    <option value="line">Line Chart</option>
+                    <option value="scatter">Scatter Plot</option>
+                    <option value="box">Box Plot</option>
+                    <option value="histogram">Histogram</option>
+                    <option value="pie">Pie Chart</option>
+                </select>
+
+                <!-- This div will be hidden/shown by JavaScript -->
+                <div id="x-column-container">
+                    <label for="x_column">2. Select X-Axis Column</label>
+                    <select name="x_column" id="x_column">
+                        <option value="">--Optional for Histogram/Pie--</option>
+                        {% for col in columns %}<option value="{{ col }}">{{ col }}</option>{% endfor %}
+                    </select>
+                </div>
+
+                <label for="y_column">3. Select Y-Axis Column (Primary)</label>
+                <select name="y_column" id="y_column" required>
+                    <option value="">--Select--</option>
+                    {% for col in columns %}<option value="{{ col }}">{{ col }}</option>{% endfor %}
+                </select>
+                
+                <label for="hue_column">4. Select Hue (for color)</label>
+                <select name="hue_column" id="hue_column">
+                    <option value="">--None--</option>
+                    {% for col in columns %}<option value="{{ col }}">{{ col }}</option>{% endfor %}
+                </select>
+
+                <label for="chart_title">5. Custom Chart Title (Optional)</label>
+                <input type="text" name="chart_title" id="chart_title" placeholder="Leave blank for automatic title">
+
+                <button type="submit" class="button" style="margin-top: 25px;">Generate Chart for Preview</button>
+            </form>
+
+            {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        </div>
+
+        <!-- ========== NAVIGATION BUTTONS ========== -->
+        <div style="margin-top: 20px;">
+            {% if visuals_count > 0 %}
+                <a href="/report" class="button secondary">View Report ({{ visuals_count }} Visuals)</a>
+            {% endif %}
+            <a href="/options" class="button secondary">Back to Options</a>
+        </div>
+    </div>
+    
+    <!-- JavaScript for hiding/showing the X-Column -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartTypeSelect = document.getElementById('chart_type');
+            const xColumnContainer = document.getElementById('x-column-container');
+            
+            function toggleXColumn() {
+                const selectedChart = chartTypeSelect.value;
+                if (selectedChart === 'histogram' || selectedChart === 'pie') {
+                    xColumnContainer.style.display = 'none';
+                } else {
+                    xColumnContainer.style.display = 'block';
+                }
+            }
+            
+            chartTypeSelect.addEventListener('change', toggleXColumn);
+            toggleXColumn(); // Run on page load
+        });
+    </script>
+</body>
+</html>

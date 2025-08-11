@@ -1,0 +1,139 @@
+/* =========================================== */
+/* SMART DATA VISUALIZER - MODERN GREEN THEME  */
+/* =========================================== */
+
+/* 1. Define Color Palette and Global Styles */
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #1DB954; /* A nice, modern green */
+    --primary-hover: #1ed760;
+    --text-color: #ffffff;
+    --text-muted: #b3b3b3;
+    --border-color: #2e2e2e;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif; /* Uses the font from Google Fonts */
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+h1 { font-size: 42px; }
+h2 { font-size: 36px; color: var(--primary-color); }
+h3 { font-size: 24px; }
+
+
+/* 2. Style Buttons and Links */
+.button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 50px; /* Pill-shaped buttons */
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+    margin: 10px 5px;
+}
+.button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+.button.secondary {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+}
+.button.secondary:hover {
+    background-color: var(--border-color);
+}
+
+
+/* 3. Style Forms and Inputs */
+form { margin-top: 30px; }
+label { display: block; margin-top: 20px; margin-bottom: 8px; font-size: 18px; font-weight: 400; color: var(--text-muted); }
+select, input[type="text"] { background-color: var(--surface-color); color: var(--text-color); padding: 12px; font-size: 16px; border-radius: 5px; border: 1px solid var(--border-color); width: 80%; max-width: 450px; }
+
+
+/* 4. Style Cards and Containers */
+.card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* 5. Flash Messages */
+.flash-message { padding: 15px; margin-bottom: 20px; border-radius: 8px; font-size: 16px; }
+.flash-message.success { background-color: rgba(29, 185, 84, 0.2); color: #d4edda; border: 1px solid var(--primary-color); }
+.flash-message a.flash-link { color: #9fdfaf; font-weight: bold; text-decoration: underline; }
+
+
+/* 6. Table Styles */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 8px;
+    overflow: hidden; /* Important for border-radius */
+}
+.styled-table thead tr {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-align: left;
+    font-weight: 600;
+}
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-right: 1px solid var(--border-color);
+}
+.styled-table th:last-of-type, .styled-table td:last-of-type {
+    border-right: none;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #2e2e2e;
+}
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+
+/* 7. Background Image Styles (with corrected path) */
+body.index-page {
+    background-image: url('/static/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+}
+body.index-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    z-index: -1;
+}

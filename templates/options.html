@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Options</title>
+
+    <!-- 1. Import the professional 'Poppins' font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Link to your central stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Block to display success messages from cleaning actions -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Card for main actions -->
+        <div class="card">
+            <h2>Select an Option</h2>
+            <p style="color: var(--text-muted);">Explore your data, clean it, or create visualizations.</p>
+            
+            <a href="/summary" class="button">Show Summary</a>
+            <a href="/visualize" class="button">Create Visuals</a>
+            
+            <!-- Form for data cleaning -->
+            <form action="/clean_data" method="post">
+                <button type="submit" name="action" value="drop_na" class="button secondary">Drop Missing Values</button>
+                <button type="submit" name="action" value="drop_duplicates" class="button secondary">Remove Duplicates</button>
+            </form>
+            
+            <!-- Back button to upload page -->
+            <a href="/upload" class="button secondary" style="margin-top: 10px;">Back to Upload</a>
+        </div>
+
+        <!-- Card for Report Actions -->
+        <div class="card">
+            <h3>Report Actions</h3>
+            {% if visuals_count > 0 %}
+                <p style="color: var(--text-muted);">You have {{ visuals_count }} visual(s) in your report.</p>
+                <a href="/report" class="button">View Report</a>
+                <a href="/clear_report" class="button secondary" onclick="return confirm('Are you sure? This will delete all saved visuals.');">Clear Report</a>
+            {% else %}
+                <p style="color: var(--text-muted);">No visuals in report yet. Go to "Create Visuals" to start.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

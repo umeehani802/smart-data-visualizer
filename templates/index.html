@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Data Visualizer</title>
+
+    <!-- This links to your new Hacker Theme stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+
+<!-- Add the 'index-page' class to activate the background image -->
+<body class="index-page">
+
+    <div class="container" style="display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 10vh;">
+
+        <!-- Using the 'title' class from your new theme for the glowing effect -->
+        <h1 class="title">Smart Data Visualizer</h1>
+
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 20px auto 40px auto; line-height: 1.6;">
+             Initialize Analysis... Upload your CSV dataset to generate statistical summaries, execute data cleaning protocols, and render advanced visualizations.
+        </p>
+
+        <!-- 
+          CORRECTION: The href has been changed from "/upload_page" 
+          to "{{ url_for('upload') }}" to point to the correct, updated route.
+        -->
+        <a href="{{ url_for('upload') }}" class="button cta">Initiate Upload</a>
+        
+    </div>
+</body>
+</html>

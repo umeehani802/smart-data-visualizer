@@ -1,0 +1,183 @@
+/* ======================================== */
+/* SMART DATA VISUALIZER - HACKER THEME     */
+/* ======================================== */
+
+/* 1. Define New Color Palette and Global Styles */
+:root {
+    --bg-color: #000000;
+    --surface-color: #1a1a1a;
+    --primary-color: #00FF00; /* Bright Green */
+    --primary-hover: #00dd00;
+    --text-color: #ffffff;
+    --text-muted: #aaaaaa;
+    --border-color: #00FF00;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5); /* Glowing effect */
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.8rem; }
+
+
+/* 2. Button Styles */
+.button { /* Default button: Green Outline */
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 10px 5px;
+}
+.button:hover {
+    background-color: var(--primary-color);
+    color: #000000;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.button.cta { /* Call-to-Action button: White Outline */
+    color: #ffffff;
+    border-color: #ffffff;
+}
+.button.cta:hover {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 15px #ffffff;
+}
+
+
+/* 3. Form and Input Styles */
+form { margin-top: 30px; }
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+select, input[type="text"] {
+    background-color: #111;
+    color: var(--primary-color);
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    width: 80%;
+    max-width: 450px;
+}
+input[type="file"] {
+    color: var(--text-muted);
+}
+input[type="file"]::file-selector-button {
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out;
+}
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--primary-hover);
+}
+
+
+/* 4. Card and Container Styles */
+.card {
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent black */
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+}
+
+
+/* 5. Flash Message Styles */
+.flash-message.success {
+    background-color: rgba(0, 255, 0, 0.1);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.flash-message a.flash-link {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+/* 6. Table Styles */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.styled-table thead tr {
+    background-color: var(--primary-color);
+    color: #000;
+    text-align: left;
+    font-weight: 600;
+}
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+.styled-table tbody tr:last-of-type {
+    border-bottom: none;
+}
+.styled-table tbody tr:hover {
+    background-color: #222;
+}
+
+/* 7. Background Image Styles */
+body.index-page {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    position: relative;
+}
+body.index-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for readability */
+    z-index: -1;
+}

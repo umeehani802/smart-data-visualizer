@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Report</title>
+
+    <!-- 1. Import the professional 'Poppins' font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- 2. Link to your central stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- This small style block helps with printing/PDF generation -->
+    <style>
+        .visual-card {
+            /* Prevents a chart from being split across two pages when printing */
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Analysis Report</h1>
+
+        <!-- Buttons are hidden when downloading the file -->
+        {% if not is_download %}
+        <div style="margin-bottom: 40px;">
+            <a href="/options" class="button secondary">Back to Options</a>
+            <a href="/download_report" class="button">Download Report as HTML</a>
+        </div>
+        {% endif %}
+        
+        <!-- Dataset Summary Card -->
+        <div class="card">
+            <h2>Dataset Summary</h2>
+            
+            <h3>Dataframe Info</h3>
+            <div class="info-box" style="background-color: var(--bg-color); text-align: left;">
+                <pre>{{ info_output }}</pre>
+            </div>
+
+            <h3 style="margin-top: 30px;">Descriptive Statistics</h3>
+            <!-- This table will now use the new 'styled-table' class -->
+            {{ describe_table | safe }}
+        </div>
+
+        <!-- Generated Visuals Section -->
+        {% if visuals %}
+            <h2 style="margin-top: 50px;">Generated Visuals</h2>
+            {% for visual in visuals %}
+                <div class="card visual-card">
+                    <h3>{{ visual.title }}</h3>
+                    <img src="data:image/png;base64,{{ visual.plot_url }}" alt="{{ visual.title }}" style="max-width: 100%; border-radius: 8px;">
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <h2>Generated Visuals</h2>
+                <p style="color: var(--text-muted);">No visuals have been generated for this report yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
