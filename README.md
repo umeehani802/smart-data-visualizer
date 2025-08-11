@@ -54,11 +54,8 @@ Copy
 Edit
 python app.py
 Open your browser and navigate to:
-
-cpp
-Copy
-Edit
 http://127.0.0.1:5000/
+
 Usage
 Use the web interface to upload your CSV dataset.
 
@@ -69,9 +66,6 @@ View summary statistics and detailed reports.
 Download or save visualizations if enabled.
 
 Project Structure
-php
-Copy
-Edit
 smart-data-visualizer/
 │
 ├── app.py                   # Main Flask application
@@ -81,15 +75,8 @@ smart-data-visualizer/
 ├── static/                  # Static files (CSS, JS, images)
 ├── templates/               # HTML templates (Jinja2)
 └── README.md                # Project README
-Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
-Created by umeeheni802.
 For any questions, contact: umehanictds487@gmail.com
 
-
-   cd smart-data-visualizer
